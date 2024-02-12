@@ -13,6 +13,7 @@ const typeDefs = `#graphql
     _id: ID!
     name: String
     price: Float
+    category: String
     ingredients: String
     calories: Int
     description: String
@@ -32,20 +33,35 @@ const typeDefs = `#graphql
   }
 `;
 
+async function connectToDB(collection) {
+
+  try {
+    // Connect to the MongoDB server
+    const client = await MongoClient.connect(uri);
+
+    // Get the database
+    const db = client.db("restaurant-app-db");
+
+    // Access the specified collection
+    const collectionObj = db.collection(collection);
+
+    // Fetch all documents from the collection
+    const data = await collectionObj.find().toArray();
+
+    // Close the connection
+    await client.close();
+
+    return data;
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    throw error; // Re-throw the error for handling in the calling code
+  }
+
+}
+
 const resolvers = {
     Query: {
-      dishes: async () => {
-        // Connect to MongoDB and retrieve dishes
-        const client = await MongoClient.connect(uri);
-        const db = client.db("restaurant-app-db"); // Replace with your database name
-        const dishesCollection = db.collection("dishes");
-        const dishesData = await dishesCollection.find().toArray(); // Fetch all dishes
-
-        // Close the connection
-        await client.close();
-
-        return dishesData;
-      },
+      dishes: () => connectToDB("dishes"),
     },
 };
 
