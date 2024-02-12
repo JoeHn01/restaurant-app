@@ -30,10 +30,11 @@ const typeDefs = `#graphql
   # case, the "books" query returns an array of zero or more Books (defined above).
   type Query {
     dishes: [Dish]
+    categories: [Category]
   }
 `;
 
-async function connectToDB(collection) {
+async function getData(collection: string) {
 
   try {
     // Connect to the MongoDB server
@@ -52,16 +53,17 @@ async function connectToDB(collection) {
     await client.close();
 
     return data;
+
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     throw error; // Re-throw the error for handling in the calling code
   }
-
 }
 
 const resolvers = {
     Query: {
-      dishes: () => connectToDB("dishes"),
+      dishes: () => getData("dishes"),
+      categories: () => getData("category"),
     },
 };
 
