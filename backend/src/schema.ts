@@ -2,8 +2,7 @@ import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config({ path: 'src/db-credentials.env' });
 
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xw40vvf.mongodb.net/?retryWrites=true&w=majority`
-
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_USERNAME}@restaurant-app-database.itrrdlz.mongodb.net/?retryWrites=true&w=majority`
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -11,11 +10,17 @@ const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
 const typeDefs = `#graphql
 
   type Dish {
-    id: Int
+    _id: ID!
     name: String
     price: Float
     ingredients: String
     calories: Int
+    description: String
+  }
+
+  type Category {
+    _id: ID!
+    name: String
     description: String
   }
 
@@ -32,7 +37,7 @@ const resolvers = {
       dishes: async () => {
         // Connect to MongoDB and retrieve dishes
         const client = await MongoClient.connect(uri);
-        const db = client.db("restaurant-db"); // Replace with your database name
+        const db = client.db("restaurant-app-db"); // Replace with your database name
         const dishesCollection = db.collection("dishes");
         const dishesData = await dishesCollection.find().toArray(); // Fetch all dishes
 
