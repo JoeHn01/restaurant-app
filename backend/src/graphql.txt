@@ -1,0 +1,70 @@
+query MyQuery {
+  user(id: "65c4a9c7be61611b25dfa9d5") {
+    _id
+    username
+    fullname
+    email
+    role
+  }
+  item(id: "65c4ac5abe61611b25dfa9d8") {
+    _id
+    name
+    description
+    price
+  }
+  category(id: "65c4ab2cbe61611b25dfa9d6") {
+    _id
+    name
+    description
+  }
+  order(id: "65cd1cf8bc1246798eb9c030") {
+    _id
+    type
+    total
+    status
+  }
+  users {
+    _id
+    fullname
+  }
+  items {
+    _id
+    name
+  }
+  categories {
+    _id
+    name
+  }
+  orders {
+    _id
+    user_id
+    total
+  }
+}
+
+mutation MyMutation {
+  addUser(fullname: "John Smith", username: "john_smith", email: "john.smith@gmail.com", role: "Admin") {
+    _id
+    username
+    fullname
+    email
+    role
+  }
+  addItem(name: "tomatoes", description: "delicious", price: 0.79) {
+    _id
+    name
+    description
+    price
+  }
+  addCategory(name: "Drinks", description: "Refreshing") {
+    _id
+    name
+    description
+  }
+  addOrder(type: "Online", total: 12.68, status: "In Progress") {
+    _id
+    type
+    total
+    status
+  }
+}

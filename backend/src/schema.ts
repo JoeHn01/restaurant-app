@@ -76,6 +76,13 @@ const typeDefs = `#graphql
     orders: [Order]
     order(id: ID!): Order
   }
+
+  type Mutation {
+    addUser(fullname: String!, username: String!, email: String!, role: String!): User!
+    addItem(name: String!, description: String!, price: Float!): Item!
+    addCategory(name: String!, description: String): Category!
+    addOrder(type: String!, total: Float!, status: String!): Order!
+  }
 `;
 
 async function connectToDB(collection: string): Promise<{ client: MongoClient; collectionObj: any }> {
@@ -92,17 +99,44 @@ async function connectToDB(collection: string): Promise<{ client: MongoClient; c
 }
 
 async function getAll<T>(collection: string): Promise<T[]> {
-  const { client, collectionObj } = await connectToDB(collection);
-  const data = await collectionObj.find().toArray();
-  await client.close();
-  return data;
+  try {
+    const { client, collectionObj } = await connectToDB(collection);
+    const data = await collectionObj.find().toArray();
+    await client.close();
+
+    return data;
+  } catch (error) {
+    // Handle errors, log them, or throw them further
+    console.error("Error getting documents:", error);
+    throw error;
+  }
 }
 
 async function getById<T>(collection: string, id: string): Promise<T> {
-  const { client, collectionObj } = await connectToDB(collection);
-  const data = await collectionObj.findOne({ _id: new ObjectId(id) });
-  await client.close();
-  return data;
+  try {
+    const { client, collectionObj } = await connectToDB(collection);
+    const data = await collectionObj.findOne({ _id: new ObjectId(id) });
+    await client.close();
+
+    return data;
+  } catch (error) {
+    console.error("Error getting document:", error);
+    throw error;
+  }
+}
+
+async function addDoc<T>(collection: string, input: any): Promise<T> {
+  try {
+    const { client, collectionObj } = await connectToDB(collection);
+    const result = await collectionObj.insertOne(input);
+    const addedDoc = await collectionObj.findOne({ _id: result.insertedId });
+    await client.close();
+
+    return addedDoc;
+  } catch (error) {
+    console.error("Error adding document to collection:", error);
+    throw error;
+  }
 }
 
 const resolvers = {
@@ -119,6 +153,13 @@ const resolvers = {
 
     orders: () => getAll("order"),
     order: (_: any, args: any ) => getById("order", args.id),
+  },
+
+  Mutation: {
+    addUser: (_: any, args: any) => addDoc("user", args),
+    addItem: (_: any, args: any) => addDoc("item", args),
+    addCategory: (_: any, args: any) => addDoc("category", args),
+    addOrder: (_: any, args: any) => addDoc("order", args),
   },
 };
 
