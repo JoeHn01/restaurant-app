@@ -64,31 +64,35 @@ const typeDefs = `#graphql
   # case, the "books" query returns an array of zero or more Books (defined above).
   type Query {
     # dishes: [Dish]
-    users: [User]
-    user(id: ID!): User
+    getUsers: [User]
+    getUser(id: ID!): User
 
-    items: [Item]
-    item(id: ID!): Item
+    getItems: [Item]
+    getItem(id: ID!): Item
 
-    categories: [Category]
-    category(id: ID!): Category
+    getCategories: [Category]
+    getCategory(id: ID!): Category
 
-    orders: [Order]
-    order(id: ID!): Order
+    getOrders: [Order]
+    getOrder(id: ID!): Order
   }
 
   type Mutation {
     createUser(fullname: String!, username: String!, email: String!, role: String!): User!
     updateUser(id: ID!, fullname: String, username: String, email: String, role: String): User!
+    deleteUser(id: ID!): User!
 
     createItem(name: String!, description: String!, price: Float!): Item!
     updateItem(id: ID! name: String, description: String, price: Float): Item!
+    deleteItem(id: ID): Item
     
     createCategory(name: String!, description: String): Category!
     updateCategory(id: ID! name: String, description: String): Category!
+    deleteCategory(id: ID): Category
     
     createOrder(type: String!, total: Float!, status: String!): Order!
     updateOrder(id: ID! type: String, total: Float, status: String): Order!
+    deleteOrder(id: ID): Order
   }
 `;
 
@@ -154,7 +158,21 @@ async function updateDoc<T>(collection: string, id: string, update: any): Promis
     return updatedDoc;
 
   } catch (error) {
-    console.error(`Error in updateDoc for collection ${collection} and ID ${id}:`, error);
+    console.error(`Error updating document in collection ${collection}:`, error);
+    throw error;
+  }
+}
+
+async function deleteDoc<T>(collection: string, id: string): Promise<T | null> {
+  try {
+    const { client, collectionObj } = await connectToDB(collection);
+    const deletedDoc = await collectionObj.findOne({ _id: new ObjectId(id) });
+    await collectionObj.deleteOne({ _id: new ObjectId(id) });
+    await client.close();
+    return deletedDoc
+
+  } catch (error) {
+    console.error(`Error deleting document from collection ${collection}:`, error);
     throw error;
   }
 }
@@ -162,31 +180,35 @@ async function updateDoc<T>(collection: string, id: string, update: any): Promis
 const resolvers = {
   Query: {
     // dishes: () => getData("dishes"),
-    users: () => getAll("user"),
-    user: (_: any, { id } ) => getById("user", id),
+    getUsers: () => getAll("user"),
+    getUser: (_: any, { id } ) => getById("user", id),
 
-    items: () => getAll("item"),
-    item: (_: any, { id } ) => getById("item", id),
+    getItems: () => getAll("item"),
+    getItem: (_: any, { id } ) => getById("item", id),
 
-    categories: () => getAll("category"),
-    category: (_: any, { id } ) => getById("category", id),
+    getCategories: () => getAll("category"),
+    getCategory: (_: any, { id } ) => getById("category", id),
 
-    orders: () => getAll("order"),
-    order: (_: any, { id } ) => getById("order", id),
+    getOrders: () => getAll("order"),
+    getOrder: (_: any, { id } ) => getById("order", id),
   },
 
   Mutation: {
     createUser: (_: any, args: any) => createDoc("user", args),
     updateUser: (_: any, { id, ...update }) => updateDoc("user", id, update),
+    deleteUser: (_: any, { id }) => deleteDoc("user", id),
 
     createItem: (_: any, args: any) => createDoc("item", args),
     updateItem: (_: any, { id, ...update }) => updateDoc("item", id, update),
+    deleteItem: (_: any, { id }) => deleteDoc("item", id),
     
     createCategory: (_: any, args: any) => createDoc("category", args),
     updateCategory: (_: any, { id, ...update }) => updateDoc("category", id, update),
+    deleteCategory: (_: any, { id }) => deleteDoc("category", id),
     
     createOrder: (_: any, args: any) => createDoc("order", args),
     updateOrder: (_: any, { id, ...update }) => updateDoc("order", id, update),
+    deleteOrder: (_: any, { id }) => deleteDoc("order", id),
   },
 };
 
