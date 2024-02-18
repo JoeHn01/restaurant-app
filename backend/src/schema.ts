@@ -79,9 +79,16 @@ const typeDefs = `#graphql
 
   type Mutation {
     addUser(fullname: String!, username: String!, email: String!, role: String!): User!
+    updateUser(id: ID!, fullname: String, username: String, email: String, role: String): User!
+
     addItem(name: String!, description: String!, price: Float!): Item!
+    updateItem(id: ID! name: String, description: String, price: Float): Item!
+    
     addCategory(name: String!, description: String): Category!
+    updateCategory(id: ID! name: String, description: String): Category!
+    
     addOrder(type: String!, total: Float!, status: String!): Order!
+    updateOrder(id: ID! type: String, total: Float, status: String): Order!
   }
 `;
 
@@ -90,8 +97,8 @@ async function connectToDB(collection: string): Promise<{ client: MongoClient; c
     const client = await MongoClient.connect(uri);
     const db = client.db("restaurant-app-db");
     const collectionObj = db.collection(collection);
-
     return { client, collectionObj };
+
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     throw error;
@@ -103,11 +110,10 @@ async function getAll<T>(collection: string): Promise<T[]> {
     const { client, collectionObj } = await connectToDB(collection);
     const data = await collectionObj.find().toArray();
     await client.close();
-
     return data;
+
   } catch (error) {
-    // Handle errors, log them, or throw them further
-    console.error("Error getting documents:", error);
+    console.error(`Error getting documents from collection ${collection}:`, error);
     throw error;
   }
 }
@@ -117,10 +123,10 @@ async function getById<T>(collection: string, id: string): Promise<T> {
     const { client, collectionObj } = await connectToDB(collection);
     const data = await collectionObj.findOne({ _id: new ObjectId(id) });
     await client.close();
-
     return data;
+
   } catch (error) {
-    console.error("Error getting document:", error);
+    console.error(`Error getting document from collection ${collection}:`, error);
     throw error;
   }
 }
@@ -131,10 +137,24 @@ async function addDoc<T>(collection: string, input: any): Promise<T> {
     const result = await collectionObj.insertOne(input);
     const addedDoc = await collectionObj.findOne({ _id: result.insertedId });
     await client.close();
-
     return addedDoc;
+
   } catch (error) {
-    console.error("Error adding document to collection:", error);
+    console.error(`Error adding document to collection ${collection}:`, error);
+    throw error;
+  }
+}
+
+async function updateDoc<T>(collection: string, id: string, update: any): Promise<T> {
+  try {
+    const { client, collectionObj } = await connectToDB(collection);
+    const result = await collectionObj.updateOne({ _id: new ObjectId(id) }, { $set: update });
+    const updatedDoc = await collectionObj.findOne({ _id: new ObjectId(id) });
+    await client.close();
+    return updatedDoc;
+
+  } catch (error) {
+    console.error(`Error in updateDoc for collection ${collection} and ID ${id}:`, error);
     throw error;
   }
 }
@@ -157,9 +177,16 @@ const resolvers = {
 
   Mutation: {
     addUser: (_: any, args: any) => addDoc("user", args),
+    updateUser: (_: any, { id, ...update }) => updateDoc("user", id, update),
+
     addItem: (_: any, args: any) => addDoc("item", args),
+    updateItem: (_: any, { id, ...update }) => updateDoc("item", id, update),
+    
     addCategory: (_: any, args: any) => addDoc("category", args),
+    updateCategory: (_: any, { id, ...update }) => updateDoc("category", id, update),
+    
     addOrder: (_: any, args: any) => addDoc("order", args),
+    updateOrder: (_: any, { id, ...update }) => updateDoc("order", id, update),
   },
 };
 
