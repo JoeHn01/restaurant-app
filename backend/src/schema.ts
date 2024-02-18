@@ -78,16 +78,16 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    addUser(fullname: String!, username: String!, email: String!, role: String!): User!
+    createUser(fullname: String!, username: String!, email: String!, role: String!): User!
     updateUser(id: ID!, fullname: String, username: String, email: String, role: String): User!
 
-    addItem(name: String!, description: String!, price: Float!): Item!
+    createItem(name: String!, description: String!, price: Float!): Item!
     updateItem(id: ID! name: String, description: String, price: Float): Item!
     
-    addCategory(name: String!, description: String): Category!
+    createCategory(name: String!, description: String): Category!
     updateCategory(id: ID! name: String, description: String): Category!
     
-    addOrder(type: String!, total: Float!, status: String!): Order!
+    createOrder(type: String!, total: Float!, status: String!): Order!
     updateOrder(id: ID! type: String, total: Float, status: String): Order!
   }
 `;
@@ -131,7 +131,7 @@ async function getById<T>(collection: string, id: string): Promise<T> {
   }
 }
 
-async function addDoc<T>(collection: string, input: any): Promise<T> {
+async function createDoc<T>(collection: string, input: any): Promise<T> {
   try {
     const { client, collectionObj } = await connectToDB(collection);
     const result = await collectionObj.insertOne(input);
@@ -148,7 +148,7 @@ async function addDoc<T>(collection: string, input: any): Promise<T> {
 async function updateDoc<T>(collection: string, id: string, update: any): Promise<T> {
   try {
     const { client, collectionObj } = await connectToDB(collection);
-    const result = await collectionObj.updateOne({ _id: new ObjectId(id) }, { $set: update });
+    await collectionObj.updateOne({ _id: new ObjectId(id) }, { $set: update });
     const updatedDoc = await collectionObj.findOne({ _id: new ObjectId(id) });
     await client.close();
     return updatedDoc;
@@ -163,29 +163,29 @@ const resolvers = {
   Query: {
     // dishes: () => getData("dishes"),
     users: () => getAll("user"),
-    user: (_: any, args: any ) => getById("user", args.id),
+    user: (_: any, { id } ) => getById("user", id),
 
     items: () => getAll("item"),
-    item: (_: any, args: any ) => getById("item", args.id),
+    item: (_: any, { id } ) => getById("item", id),
 
     categories: () => getAll("category"),
-    category: (_: any, args: any ) => getById("category", args.id),
+    category: (_: any, { id } ) => getById("category", id),
 
     orders: () => getAll("order"),
-    order: (_: any, args: any ) => getById("order", args.id),
+    order: (_: any, { id } ) => getById("order", id),
   },
 
   Mutation: {
-    addUser: (_: any, args: any) => addDoc("user", args),
+    createUser: (_: any, args: any) => createDoc("user", args),
     updateUser: (_: any, { id, ...update }) => updateDoc("user", id, update),
 
-    addItem: (_: any, args: any) => addDoc("item", args),
+    createItem: (_: any, args: any) => createDoc("item", args),
     updateItem: (_: any, { id, ...update }) => updateDoc("item", id, update),
     
-    addCategory: (_: any, args: any) => addDoc("category", args),
+    createCategory: (_: any, args: any) => createDoc("category", args),
     updateCategory: (_: any, { id, ...update }) => updateDoc("category", id, update),
     
-    addOrder: (_: any, args: any) => addDoc("order", args),
+    createOrder: (_: any, args: any) => createDoc("order", args),
     updateOrder: (_: any, { id, ...update }) => updateDoc("order", id, update),
   },
 };
