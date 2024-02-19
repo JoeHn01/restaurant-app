@@ -66,15 +66,19 @@ const typeDefs = `#graphql
     # dishes: [Dish]
     getUsers: [User]
     getUser(id: ID!): User
+    filterUsers(fullname: String, username: String, email: String, role: String): [User]
 
     getItems: [Item]
     getItem(id: ID!): Item
+    filterItems(name: String, description: String, price: Float): [Item]
 
     getCategories: [Category]
     getCategory(id: ID!): Category
+    filterCategories(name: String, description: String): [Category]
 
     getOrders: [Order]
     getOrder(id: ID!): Order
+    filterOrders(type: String, total: Float, status: String): [Order]
   }
 
   type Mutation {
@@ -109,7 +113,7 @@ async function connectToDB(collection: string): Promise<{ client: MongoClient; c
   }
 }
 
-async function getAll<T>(collection: string): Promise<T[]> {
+async function getDocs<T>(collection: string): Promise<T[]> {
   try {
     const { client, collectionObj } = await connectToDB(collection);
     const data = await collectionObj.find().toArray();
@@ -122,7 +126,7 @@ async function getAll<T>(collection: string): Promise<T[]> {
   }
 }
 
-async function getById<T>(collection: string, id: string): Promise<T> {
+async function getDocById<T>(collection: string, id: string): Promise<T> {
   try {
     const { client, collectionObj } = await connectToDB(collection);
     const data = await collectionObj.findOne({ _id: new ObjectId(id) });
@@ -131,6 +135,25 @@ async function getById<T>(collection: string, id: string): Promise<T> {
 
   } catch (error) {
     console.error(`Error getting document from collection ${collection}:`, error);
+    throw error;
+  }
+}
+
+async function filterDocs<T>(collection: string, filters: { field: string, value: string }[]): Promise<T[]> {
+  try {
+    const { client, collectionObj } = await connectToDB(collection);
+    const filterObject = {};
+    filters.forEach(filter => {
+      if (filter.value !== undefined) {
+        filterObject[filter.field] = filter.value;
+      }
+    });
+    const matchedDocuments = await collectionObj.find(filterObject).toArray();
+    await client.close();
+    return matchedDocuments;
+
+  } catch (error) {
+    console.error(`Error filtering documents for collection ${collection}:`, error);
     throw error;
   }
 }
@@ -180,35 +203,55 @@ async function deleteDoc<T>(collection: string, id: string): Promise<T | null> {
 const resolvers = {
   Query: {
     // dishes: () => getData("dishes"),
-    getUsers: () => getAll("user"),
-    getUser: (_: any, { id } ) => getById("user", id),
+    getUsers: () => getDocs("user"),
+    getUser: ( _: any, { id } ) => getDocById("user", id),
+    filterUsers: ( _: any, filters: any ) => filterDocs("user", [
+      { field: "username", value: filters.username },
+      { field: "fullname", value: filters.fullname },
+      { field: "email", value: filters.email },
+      { field: "role", value: filters.role },
+    ]),
 
-    getItems: () => getAll("item"),
-    getItem: (_: any, { id } ) => getById("item", id),
+    getItems: () => getDocs("item"),
+    getItem: ( _: any, { id } ) => getDocById("item", id),
+    filterItems: ( _: any, filters: any ) => filterDocs("item", [
+      { field: "name", value: filters.name },
+      { field: "description", value: filters.description },
+      { field: "price", value: filters.price },
+    ]),
 
-    getCategories: () => getAll("category"),
-    getCategory: (_: any, { id } ) => getById("category", id),
+    getCategories: () => getDocs("category"),
+    getCategory: ( _: any, { id } ) => getDocById("category", id),
+    filterCategories: ( _: any, filters: any ) => filterDocs("category", [
+      { field: "name", value: filters.username },
+      { field: "description", value: filters.fullname },
+    ]),
 
-    getOrders: () => getAll("order"),
-    getOrder: (_: any, { id } ) => getById("order", id),
+    getOrders: () => getDocs("order"),
+    getOrder: ( _: any, { id } ) => getDocById("order", id),
+    filterOrders: ( _: any, filters: any ) => filterDocs("order", [
+      { field: "type", value: filters.type },
+      { field: "total", value: filters.total },
+      { field: "status", value: filters.status },
+    ]),
   },
 
   Mutation: {
-    createUser: (_: any, args: any) => createDoc("user", args),
-    updateUser: (_: any, { id, ...update }) => updateDoc("user", id, update),
-    deleteUser: (_: any, { id }) => deleteDoc("user", id),
+    createUser: ( _: any, args: any ) => createDoc("user", args),
+    updateUser: ( _: any, { id, ...update } ) => updateDoc("user", id, update),
+    deleteUser: ( _: any, { id } ) => deleteDoc("user", id),
 
-    createItem: (_: any, args: any) => createDoc("item", args),
-    updateItem: (_: any, { id, ...update }) => updateDoc("item", id, update),
-    deleteItem: (_: any, { id }) => deleteDoc("item", id),
+    createItem: ( _: any, args: any ) => createDoc("item", args),
+    updateItem: ( _: any, { id, ...update } ) => updateDoc("item", id, update),
+    deleteItem: ( _: any, { id } ) => deleteDoc("item", id),
     
-    createCategory: (_: any, args: any) => createDoc("category", args),
-    updateCategory: (_: any, { id, ...update }) => updateDoc("category", id, update),
-    deleteCategory: (_: any, { id }) => deleteDoc("category", id),
+    createCategory: ( _: any, args: any ) => createDoc("category", args),
+    updateCategory: ( _: any, { id, ...update } ) => updateDoc("category", id, update),
+    deleteCategory: ( _: any, { id } ) => deleteDoc("category", id),
     
-    createOrder: (_: any, args: any) => createDoc("order", args),
-    updateOrder: (_: any, { id, ...update }) => updateDoc("order", id, update),
-    deleteOrder: (_: any, { id }) => deleteDoc("order", id),
+    createOrder: ( _: any, args: any ) => createDoc("order", args),
+    updateOrder: ( _: any, { id, ...update } ) => updateDoc("order", id, update),
+    deleteOrder: ( _: any, { id } ) => deleteDoc("order", id),
   },
 };
 
