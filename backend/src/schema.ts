@@ -33,7 +33,7 @@ const typeDefs = `#graphql
     name: String!
     description: String!
     price: Float!
-    category_id: ID!
+    category: Category
   }
 
   type Category {
