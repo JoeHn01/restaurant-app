@@ -86,7 +86,7 @@ const typeDefs = `#graphql
     updateUser(id: ID!, fullname: String, username: String, email: String, role: String): User!
     deleteUser(id: ID!): User!
 
-    createItem(name: String!, description: String!, price: Float!): Item!
+    createItem(name: String!, description: String!, price: Float!, categoryName: String!): Item!
     updateItem(id: ID! name: String, description: String, price: Float): Item!
     deleteItem(id: ID): Item
     
@@ -241,7 +241,24 @@ const resolvers = {
     updateUser: ( _: any, { id, ...update } ) => updateDoc("user", id, update),
     deleteUser: ( _: any, { id } ) => deleteDoc("user", id),
 
-    createItem: ( _: any, args: any ) => createDoc("item", args),
+    createItem: async ( _: any, args: any ) => {
+      let { name, description, price, categoryName } = args;
+      //get categoryId By name 
+      let result = await filterDocs("category", [{field: "name", value: categoryName}])
+      let catId = null
+
+      if(result.length > 0){
+        let { _id } = result[0] as { _id }
+        catId = _id
+      } else {
+        //if the result is null create a new document
+        let newDoc = await createDoc("category", { name: categoryName})
+        let { _id } = newDoc as { _id }
+        catId = _id
+      }
+    
+      return await createDoc("item", {name, description, price, category_id: catId})
+    },
     updateItem: ( _: any, { id, ...update } ) => updateDoc("item", id, update),
     deleteItem: ( _: any, { id } ) => deleteDoc("item", id),
     
