@@ -33,7 +33,7 @@ const typeDefs = `#graphql
     name: String!
     description: String!
     price: Float!
-    category: Category
+    category: ID!
   }
 
   type Category {
@@ -223,8 +223,8 @@ const resolvers = {
     getCategories: () => getDocs("category"),
     getCategory: ( _: any, { id } ) => getDocById("category", id),
     filterCategories: ( _: any, filters: any ) => filterDocs("category", [
-      { field: "name", value: filters.username },
-      { field: "description", value: filters.fullname },
+      { field: "name", value: filters.name },
+      { field: "description", value: filters.description },
     ]),
 
     getOrders: () => getDocs("order"),
