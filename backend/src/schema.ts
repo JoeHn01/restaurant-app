@@ -70,7 +70,7 @@ const typeDefs = `#graphql
 
     getItems: [Item]
     getItem(id: ID!): Item
-    filterItems(name: String, description: String, price: Float): [Item]
+    filterItems(name: String, description: String, price: Float, categoryName: String): [Item]
 
     getCategories: [Category]
     getCategory(id: ID!): Category
@@ -87,7 +87,7 @@ const typeDefs = `#graphql
     deleteUser(id: ID!): User!
 
     createItem(name: String!, description: String!, price: Float!, categoryName: String!): Item!
-    updateItem(id: ID! name: String, description: String, price: Float): Item!
+    updateItem(id: ID! name: String, description: String, price: Float, categoryName: String): Item!
     deleteItem(id: ID): Item
     
     createCategory(name: String!, description: String): Category!
@@ -200,39 +200,56 @@ async function deleteDoc<T>(collection: string, id: string): Promise<T | null> {
   }
 }
 
+async function getOrCreateCategoryId(categoryName: string): Promise<string | Error> {
+  try {
+    const result: { _id: string }[] = await filterDocs("category", [{ field: "name", value: categoryName }]);
+
+    if (result.length > 0) {
+      return result[0]._id;
+    } else {
+      const newDoc = await createDoc("category", { name: categoryName });
+      const newDocWithId = newDoc as { _id: string }; // Type assertion for newDoc
+      return newDocWithId._id;
+    }
+  } catch (error) {
+    return new Error(`Error getting or creating category for name "${categoryName}": ${error.message}`);
+  }
+}
+
 const resolvers = {
   Query: {
     // dishes: () => getData("dishes"),
     getUsers: () => getDocs("user"),
     getUser: ( _: any, { id } ) => getDocById("user", id),
-    filterUsers: ( _: any, filters: any ) => filterDocs("user", [
-      { field: "username", value: filters.username },
-      { field: "fullname", value: filters.fullname },
-      { field: "email", value: filters.email },
-      { field: "role", value: filters.role },
+    filterUsers: ( _: any, { username, fullname, email, role } ) => filterDocs("user", [
+      { field: "username", value: username },
+      { field: "fullname", value: fullname },
+      { field: "email", value: email },
+      { field: "role", value: role },
     ]),
 
     getItems: () => getDocs("item"),
     getItem: ( _: any, { id } ) => getDocById("item", id),
-    filterItems: ( _: any, filters: any ) => filterDocs("item", [
-      { field: "name", value: filters.name },
-      { field: "description", value: filters.description },
-      { field: "price", value: filters.price },
+    filterItems: async ( _: any, { name, description, price, categoryName } ) => filterDocs("item", [
+      { field: "name", value: name },
+      { field: "description", value: description },
+      { field: "price", value: price },
+      { field: "category_id", value: await getOrCreateCategoryId(categoryName)},
     ]),
 
     getCategories: () => getDocs("category"),
     getCategory: ( _: any, { id } ) => getDocById("category", id),
-    filterCategories: ( _: any, filters: any ) => filterDocs("category", [
-      { field: "name", value: filters.name },
-      { field: "description", value: filters.description },
+    filterCategories: ( _: any, { name, description } ) => filterDocs("category", [
+      { field: "name", value: name },
+      { field: "description", value: description },
     ]),
 
     getOrders: () => getDocs("order"),
     getOrder: ( _: any, { id } ) => getDocById("order", id),
-    filterOrders: ( _: any, filters: any ) => filterDocs("order", [
-      { field: "type", value: filters.type },
-      { field: "total", value: filters.total },
-      { field: "status", value: filters.status },
+    filterOrders: ( _: any, { type, total, status} ) => filterDocs("order", [
+      { field: "type", value: type },
+      { field: "total", value: total },
+      { field: "status", value: status },
     ]),
   },
 
@@ -241,25 +258,10 @@ const resolvers = {
     updateUser: ( _: any, { id, ...update } ) => updateDoc("user", id, update),
     deleteUser: ( _: any, { id } ) => deleteDoc("user", id),
 
-    createItem: async ( _: any, args: any ) => {
-      let { name, description, price, categoryName } = args;
-      //get categoryId By name 
-      let result = await filterDocs("category", [{field: "name", value: categoryName}])
-      let catId = null
-
-      if(result.length > 0){
-        let { _id } = result[0] as { _id }
-        catId = _id
-      } else {
-        //if the result is null create a new document
-        let newDoc = await createDoc("category", { name: categoryName})
-        let { _id } = newDoc as { _id }
-        catId = _id
-      }
-    
-      return await createDoc("item", {name, description, price, category_id: catId})
-    },
-    updateItem: ( _: any, { id, ...update } ) => updateDoc("item", id, update),
+    createItem: async ( _: any, { name, description, price, categoryName } ) => 
+      createDoc("item", { name, description, price, category_id: await getOrCreateCategoryId(categoryName) }),
+    updateItem: async ( _: any, { id, categoryName, ...update } ) =>
+      updateDoc("item", id, { ...update, category_id: await getOrCreateCategoryId(categoryName) }),
     deleteItem: ( _: any, { id } ) => deleteDoc("item", id),
     
     createCategory: ( _: any, args: any ) => createDoc("category", args),
