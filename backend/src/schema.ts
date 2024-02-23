@@ -186,7 +186,7 @@ async function updateDoc<T>(collection: string, id: string, update: any): Promis
   }
 }
 
-async function deleteDoc<T>(collection: string, id: string): Promise<T | null> {
+async function deleteDoc<T>(collection: string, id: string): Promise<T> {
   try {
     const { client, collectionObj } = await connectToDB(collection);
     const deletedDoc = await collectionObj.findOne({ _id: new ObjectId(id) });
@@ -258,16 +258,16 @@ const resolvers = {
     updateUser: ( _: any, { id, ...update } ) => updateDoc("user", id, update),
     deleteUser: ( _: any, { id } ) => deleteDoc("user", id),
 
-    createItem: async ( _: any, { name, description, price, categoryName } ) => 
-      createDoc("item", { name, description, price, category_id: await getOrCreateCategoryId(categoryName) }),
+    createItem: async ( _: any, { categoryName, ...args } ) => 
+      createDoc("item", { ...args, category_id: await getOrCreateCategoryId(categoryName) }),
     updateItem: async ( _: any, { id, categoryName, ...update } ) =>
       updateDoc("item", id, { ...update, category_id: await getOrCreateCategoryId(categoryName) }),
     deleteItem: ( _: any, { id } ) => deleteDoc("item", id),
-    
+
     createCategory: ( _: any, args: any ) => createDoc("category", args),
     updateCategory: ( _: any, { id, ...update } ) => updateDoc("category", id, update),
     deleteCategory: ( _: any, { id } ) => deleteDoc("category", id),
-    
+
     createOrder: ( _: any, args: any ) => createDoc("order", args),
     updateOrder: ( _: any, { id, ...update } ) => updateDoc("order", id, update),
     deleteOrder: ( _: any, { id } ) => deleteDoc("order", id),
