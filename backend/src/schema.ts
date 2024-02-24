@@ -25,6 +25,7 @@ const typeDefs = `#graphql
     fullname: String!
     username: String!
     email: String!
+    number: String!
     role: String!
   }
 
@@ -66,7 +67,7 @@ const typeDefs = `#graphql
     # dishes: [Dish]
     getUsers: [User]
     getUser(id: ID!): User
-    filterUsers(fullname: String, username: String, email: String, role: String): [User]
+    filterUsers(fullname: String, username: String, email: String, number: String, role: String): [User]
 
     getItems: [Item]
     getItem(id: ID!): Item
@@ -82,8 +83,8 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    createUser(fullname: String!, username: String!, email: String!, role: String!): User!
-    updateUser(id: ID!, fullname: String, username: String, email: String, role: String): User!
+    createUser(fullname: String!, username: String!, email: String!, number: String!, role: String!): User!
+    updateUser(id: ID!, fullname: String, username: String, email: String, number: String, role: String): User!
     deleteUser(id: ID!): User!
 
     createItem(name: String!, description: String!, price: Float!, categoryName: String!): Item!
@@ -221,10 +222,11 @@ const resolvers = {
     // dishes: () => getData("dishes"),
     getUsers: () => getDocs("user"),
     getUser: ( _: any, { id } ) => getDocById("user", id),
-    filterUsers: ( _: any, { username, fullname, email, role } ) => filterDocs("user", [
+    filterUsers: ( _: any, { username, fullname, email, number, role } ) => filterDocs("user", [
       { field: "username", value: username },
       { field: "fullname", value: fullname },
       { field: "email", value: email },
+      { field: "number", value: number },
       { field: "role", value: role },
     ]),
 

@@ -1,41 +1,58 @@
 query MyQuery {
-  user(id: "65c4a9c7be61611b25dfa9d5") {
+  getUser(id: "65c4a9c7be61611b25dfa9d5") {
     _id
-    username
     fullname
+    username
     email
+    number
     role
   }
-  item(id: "65c4ac5abe61611b25dfa9d8") {
+
+  getItem(id: "65c4ac5abe61611b25dfa9d8") {
     _id
     name
     description
     price
+    category_id
   }
-  category(id: "65c4ab2cbe61611b25dfa9d6") {
+
+  getCategory(id: "65c4ab2cbe61611b25dfa9d6") {
     _id
     name
     description
   }
-  order(id: "65cd1cf8bc1246798eb9c030") {
+
+  getOrder(id: "65cd1cf8bc1246798eb9c030") {
     _id
     type
     total
     status
   }
-  users {
+
+  getUsers {
     _id
     fullname
+    username
+    email
+    number
+    role
   }
-  items {
+
+  getItems {
     _id
     name
+    description
+    price
+    category_id
   }
-  categories {
+
+  getCategories {
     _id
     name
+    description
   }
-  orders {
+
+  getOrders {
     _id
     user_id
     total
@@ -43,25 +60,29 @@ query MyQuery {
 }
 
 mutation MyMutation {
-  addUser(fullname: "John Smith", username: "john_smith", email: "john.smith@gmail.com", role: "Admin") {
+  createUser(fullname: "John Smith", username: "john_smith", email: "john.smith@gmail.com", role: "Admin") {
     _id
     username
     fullname
     email
     role
   }
-  addItem(name: "tomatoes", description: "delicious", price: 0.79) {
+
+  createItem(name: "Tomatoes", description: "Delicious and fresh roma tomatoes.", price: 0.79, categoryName: "Veggies") {
     _id
     name
     description
     price
+    category_id
   }
-  addCategory(name: "Drinks", description: "Refreshing") {
+
+  createCategory(name: "Drinks", description: "Refreshing") {
     _id
     name
     description
   }
-  addOrder(type: "Online", total: 12.68, status: "In Progress") {
+
+  createOrder(type: "Online", total: 12.68, status: "In Progress") {
     _id
     type
     total
