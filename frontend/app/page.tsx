@@ -10,20 +10,18 @@ import Footer from "./components/footer/footer"
 export default function Home() {
   return (
     <div>
-      <Header></Header>
-      <Hero></Hero>
-      <About></About>
-      <div id="menu">
-        <Menu></Menu>
-      </div>
+      <Header />
+      <Hero />
+      <About />
+      <Menu />
       <div id="gallery">
-        <Gallery></Gallery>
+        <Gallery />
       </div>
       <div id="contact">
-        <Contact></Contact>
+        <Contact />
       </div>
       <div id="footer">
-        <Footer></Footer>
+        <Footer />
       </div>
     </div>
   );

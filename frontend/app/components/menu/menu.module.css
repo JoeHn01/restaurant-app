@@ -1,0 +1,57 @@
+.menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  background-color: black;
+  color: white;
+}
+
+.menuImage {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../public/menu-background.jpg");
+  opacity: 0.4;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: row;
+}
+
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.menuCategory {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.menuItemPrice {
+  font-style: italic;
+}
+
+.menuButton {
+  position: relative;
+  background-color: #008b8b;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 20%;
+  margin: 2rem;
+}
