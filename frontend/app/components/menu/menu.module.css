@@ -1,4 +1,6 @@
 .menu {
+  padding-top: 80px;
+  padding-bottom: 80px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -18,6 +20,11 @@
   opacity: 0.4;
 }
 
+.menuCategory {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
 .menuItems {
   display: flex;
   flex-direction: row;
@@ -34,9 +41,15 @@
   padding: 1rem;
 }
 
-.menuCategory {
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
+.menuItemImage {
+  object-fit: cover;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 10%;
+}
+
+.menuItemName {
+  margin-bottom: 0;
 }
 
 .menuItemPrice {

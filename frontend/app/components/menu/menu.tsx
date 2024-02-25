@@ -8,40 +8,19 @@ const Menu = () => {
       <h2 className={styles.menuCategory}>Category Name</h2>
       <div className={styles.menuItems}>
         <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
           <h3 className={styles.menuItemName}>Item Name</h3>
           <p className={styles.menuItemDescription}>Item Description</p>
           <span className={styles.menuItemPrice}>Item Price</span>
         </div>
         <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
           <h3 className={styles.menuItemName}>Item Name</h3>
           <p className={styles.menuItemDescription}>Item Description</p>
           <span className={styles.menuItemPrice}>Item Price</span>
         </div>
         <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
-          <h3 className={styles.menuItemName}>Item Name</h3>
-          <p className={styles.menuItemDescription}>Item Description</p>
-          <span className={styles.menuItemPrice}>Item Price</span>
-        </div>
-      </div>
-      <h2 className={styles.menuCategory}>Category Name</h2>
-      <div className={styles.menuItems}>
-        <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
-          <h3 className={styles.menuItemName}>Item Name</h3>
-          <p className={styles.menuItemDescription}>Item Description</p>
-          <span className={styles.menuItemPrice}>Item Price</span>
-        </div>
-        <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
-          <h3 className={styles.menuItemName}>Item Name</h3>
-          <p className={styles.menuItemDescription}>Item Description</p>
-          <span className={styles.menuItemPrice}>Item Price</span>
-        </div>
-        <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
           <h3 className={styles.menuItemName}>Item Name</h3>
           <p className={styles.menuItemDescription}>Item Description</p>
           <span className={styles.menuItemPrice}>Item Price</span>
@@ -50,19 +29,40 @@ const Menu = () => {
       <h2 className={styles.menuCategory}>Category Name</h2>
       <div className={styles.menuItems}>
         <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
           <h3 className={styles.menuItemName}>Item Name</h3>
           <p className={styles.menuItemDescription}>Item Description</p>
           <span className={styles.menuItemPrice}>Item Price</span>
         </div>
         <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
           <h3 className={styles.menuItemName}>Item Name</h3>
           <p className={styles.menuItemDescription}>Item Description</p>
           <span className={styles.menuItemPrice}>Item Price</span>
         </div>
         <div className={styles.menuItem}>
-          <img className={styles.menuItemImage} src=""/>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
+          <h3 className={styles.menuItemName}>Item Name</h3>
+          <p className={styles.menuItemDescription}>Item Description</p>
+          <span className={styles.menuItemPrice}>Item Price</span>
+        </div>
+      </div>
+      <h2 className={styles.menuCategory}>Category Name</h2>
+      <div className={styles.menuItems}>
+        <div className={styles.menuItem}>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
+          <h3 className={styles.menuItemName}>Item Name</h3>
+          <p className={styles.menuItemDescription}>Item Description</p>
+          <span className={styles.menuItemPrice}>Item Price</span>
+        </div>
+        <div className={styles.menuItem}>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
+          <h3 className={styles.menuItemName}>Item Name</h3>
+          <p className={styles.menuItemDescription}>Item Description</p>
+          <span className={styles.menuItemPrice}>Item Price</span>
+        </div>
+        <div className={styles.menuItem}>
+          <img className={styles.menuItemImage} src="empty-image.jpg"/>
           <h3 className={styles.menuItemName}>Item Name</h3>
           <p className={styles.menuItemDescription}>Item Description</p>
           <span className={styles.menuItemPrice}>Item Price</span>
