@@ -1,50 +1,53 @@
-/* .hero {
-  display: flex;
-  justify-content: center;
-  align-items: space-between;
-  background-image: url("../../../../public/hero-background.jpg");
-  opacity: 0.5;
-  color: white;
-} */
 .hero {
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   height: 100vh;
   background-color: black;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url("../../../public/hero-background.jpg");
+  opacity: 0.4;
 }
 
 .heroContent {
-  max-width: 50vh; /* Limit content width */
+  max-width: 80vh;
   text-align: center;
-  padding: 2rem;
-  color: #ffffff;
+  color: white;
 }
 
 .heroHeading {
-  font-size: 2rem; /* Adjust heading size as needed */
-  font-weight: bold;
+  position: relative;
+  font-size: 2rem;
+  color: white;
   margin-bottom: 1rem;
 }
 
 .heroSubheading {
-  font-size: 1.2rem; /* Adjust subheading size as needed */
+  position: relative;
+  font-size: 1.2rem;
   color: white;
   margin-bottom: 2rem;
 }
 
 .heroButton {
-  background-color: #008b8b; /* Change button color */
-  color: #fff; /* Change button text color */
-  padding: 1rem 2rem;
+  position: relative;
+  background-color: #008b8b;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
-  cursor: pointer; /* Indicate clickable element */
-  width: 50%;
+  cursor: pointer;
+  width: 40%;
 }
 
 .heroButton:hover {
-  background-color: #087871; /* Change button hover color */
+  background-color: #087871;
 }

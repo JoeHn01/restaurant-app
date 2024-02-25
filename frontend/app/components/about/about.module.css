@@ -1,0 +1,53 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top, #23a4d7 0%, #000000 100%);
+  color: white;
+}
+
+.aboutHeading {
+  margin-top: 2rem;
+}
+
+.aboutSubheading {
+  text-align: center;
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+}
+
+.teamMember {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  padding: 2rem;
+  align-items: center;
+}
+
+.teamMemberImage {
+  object-fit: cover;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 20%;
+}
+
+.aboutButton {
+  position: relative;
+  background-color: #008b8b;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 20%;
+  margin-bottom: 2rem;
+}
+
+.aboutButton:hover {
+  background-color: #087871;
+}
