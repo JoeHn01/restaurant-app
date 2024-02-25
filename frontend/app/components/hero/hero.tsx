@@ -1,4 +1,3 @@
-import { url } from "inspector"
 import styles from "./hero.module.css"
 import React from 'react'
 

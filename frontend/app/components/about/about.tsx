@@ -29,7 +29,6 @@ const About = () => {
           <h4>First Last</h4>
           <p>Position</p>
         </div>
-        {/* Add more team member elements with similar structure */}
       </div>
       <button className={styles.aboutButton}>Join The Team</button>
   </section>
