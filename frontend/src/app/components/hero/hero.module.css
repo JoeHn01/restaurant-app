@@ -1,0 +1,48 @@
+/* .hero {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  background-image: url("../../../../public/hero-background.jpg");
+  opacity: 0.5;
+  color: white;
+} */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: space-evenly;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("../../../../public/hero-background.jpg");
+}
+
+.heroContent {
+  max-width: 60vh; /* Limit content width */
+  text-align: center; /* Center text within content container */
+  padding: 2rem;
+  color: #ffffff;
+}
+
+.heroHeading {
+  font-size: 2rem; /* Adjust heading size as needed */
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.heroSubheading {
+  font-size: 1.2rem; /* Adjust subheading size as needed */
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.heroButton {
+  background-color: #008b8b; /* Change button color */
+  color: #fff; /* Change button text color */
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; /* Indicate clickable element */
+}
+
+.heroButton:hover {
+  background-color: #087871; /* Change button hover color */
+}

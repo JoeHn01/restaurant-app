@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkcyan;
+}
+
+.logo {
+  display: flex;
+  text-decoration: none;
+  margin-left: 1rem; /* Move logo to the left side */
+  font-size: 1rem; /* Adjust font size as needed */
+  font-weight: bold;
+  color: #333;
+}
+
+.navlist {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0 30rem;
+}
+
+.navitem {
+  display: flex;
+  margin: 0;
+}
+
+.navlink {
+  text-decoration: none;
+  color: #f2efef;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.navlink:hover {
+  color: #087871;
+  background-color: #bffcfc;
+}
