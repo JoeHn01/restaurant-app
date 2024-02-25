@@ -1,8 +1,18 @@
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkcyan;
+} */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: darkcyan;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 .logo {

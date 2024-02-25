@@ -9,15 +9,16 @@
 .hero {
   position: relative;
   display: flex;
-  align-items: space-evenly;
-  justify-content: center;
+  align-items: center;
+  justify-content: left;
   height: 100vh;
-  background-image: url("../../../../public/hero-background.jpg");
+  background-color: black;
+  background-image: url("../../../public/hero-background.jpg");
 }
 
 .heroContent {
-  max-width: 60vh; /* Limit content width */
-  text-align: center; /* Center text within content container */
+  max-width: 50vh; /* Limit content width */
+  text-align: center;
   padding: 2rem;
   color: #ffffff;
 }
@@ -41,6 +42,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer; /* Indicate clickable element */
+  width: 50%;
 }
 
 .heroButton:hover {
