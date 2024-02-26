@@ -17,12 +17,8 @@ export default function Home() {
       <div id="gallery">
         <Gallery />
       </div>
-      <div id="contact">
-        <Contact />
-      </div>
-      <div id="footer">
-        <Footer />
-      </div>
+      <Contact />
+      <Footer />
     </div>
   );
 }
