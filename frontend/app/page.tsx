@@ -14,9 +14,7 @@ export default function Home() {
       <Hero />
       <About />
       <Menu />
-      <div id="gallery">
-        <Gallery />
-      </div>
+      <Gallery />
       <Contact />
       <Footer />
     </div>

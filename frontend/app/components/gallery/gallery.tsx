@@ -14,7 +14,7 @@ const Gallery = () => {
   };
 
   return (
-    <section className={styles.gallery}>
+    <section id="gallery" className={styles.gallery}>
       <h2 className={styles.galleryHeading}>Our Work</h2>
       <p className={styles.gallerySubheading}>Take a look at some of our recent projects.</p>
 
@@ -40,6 +40,7 @@ const Gallery = () => {
           RightArrow
         </button>
       </div>
+      <button className={styles.galleryButton}>See More</button>
     </section>
   )
 }
