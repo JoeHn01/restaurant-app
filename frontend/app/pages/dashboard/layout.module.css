@@ -1,0 +1,9 @@
+.container {
+    display: grid;
+    grid-template-columns: 250px auto; /* Sidebar takes 250px, rest is for dashboard content */
+    gap: 20px; /* Gap between sidebar and dashboard content */
+  }
+  
+  .content {
+    display: grid; /* Apply grid to the content wrapper */
+  }

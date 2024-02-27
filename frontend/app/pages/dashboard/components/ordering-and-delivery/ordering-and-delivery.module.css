@@ -1,0 +1,26 @@
+.ordering-and-delivery {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ordering-and-delivery h2 {
+margin-top: 0;
+margin-bottom: 16px;
+font-size: 1.5rem;
+}
+
+.ordering-and-delivery p {
+margin-bottom: 8px;
+}
+
+.ordering-and-delivery ul {
+list-style-type: none;
+padding: 0;
+}
+
+.ordering-and-delivery li {
+margin-bottom: 8px;
+}
