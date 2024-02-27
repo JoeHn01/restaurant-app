@@ -4,6 +4,7 @@
   justify-content: center;
   height: 100vh;
   background-color: black;
+  color: white;
 }
 
 .heroImage {
@@ -20,27 +21,24 @@
 .heroContent {
   max-width: 80vh;
   text-align: center;
-  color: white;
 }
 
 .heroHeading {
   position: relative;
   font-size: 2rem;
-  color: white;
   margin-bottom: 1rem;
 }
 
 .heroSubheading {
   position: relative;
   font-size: 1.2rem;
-  color: white;
   margin-bottom: 2rem;
 }
 
 .heroButton {
   position: relative;
   background-color: #008b8b;
-  color: #fff;
+  color: white;
   padding: 1rem;
   font-size: 1rem;
   border: none;
