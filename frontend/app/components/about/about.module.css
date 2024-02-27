@@ -14,6 +14,7 @@
 
 .aboutSubheading {
   text-align: center;
+  max-width: 75%;
 }
 
 .team {
@@ -31,9 +32,15 @@
 
 .teamMemberImage {
   object-fit: cover;
-  width: 20rem;
-  height: 20rem;
+  width: 75%;
+  height: 75%;
   border-radius: 20%;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0.7;
+}
+
+.teamMemberImage:hover {
+  opacity: 1;
 }
 
 .aboutButton {
@@ -52,4 +59,15 @@
 
 .aboutButton:hover {
   background-color: #087871;
+}
+
+@media only screen and (max-width: 860px) {
+  .team {
+    flex-direction: column;
+  }
+  .teamMember {
+    margin-top: 1rem;
+    padding: 1rem;
+    flex-direction: column;
+  }
 }
