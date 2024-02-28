@@ -1,12 +1,16 @@
+// Dashboard.tsx (or any other page/component)
 import React from 'react';
+import MenuOverview from './components/menu-overview/menu-overview';
+import PopularDishes from './components/popular-dishes/popular-dishes';
 
-const MenuPage: React.FC = () => {
+const Dashboard: React.FC = () => {
   return (
     <div>
       <h1>Menu</h1>
-      {/* Add your view menu content here */}
+      <MenuOverview />
+      <PopularDishes />
     </div>
   );
 };
 
-export default MenuPage;
+export default Dashboard;
