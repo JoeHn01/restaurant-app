@@ -1,0 +1,18 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr; /* One column */
+    grid-template-rows: auto auto; /* Two rows */
+    grid-gap: 1vh;
+  }
+  
+  .child {
+    /* Ensure each child component takes the full width of the grid column */
+    width: 100%;
+  }
+  
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+    grid-gap: 1vh;
+  }
+  

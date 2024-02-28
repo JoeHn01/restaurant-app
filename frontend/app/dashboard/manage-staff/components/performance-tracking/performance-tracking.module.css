@@ -1,0 +1,27 @@
+.performanceTrackingContainer {
+    border-radius: 8px;
+  }
+  
+  .scrollableContainer {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .dayContainer {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .metricsList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .performanceMetric {
+    margin-bottom: 5px;
+  }
+  

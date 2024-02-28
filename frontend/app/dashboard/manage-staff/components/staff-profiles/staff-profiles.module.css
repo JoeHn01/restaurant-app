@@ -1,0 +1,33 @@
+.staff-profiles-container {
+    width: 100%;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three profiles per row */
+    gap: 20px; /* Adjust as needed */
+}
+
+.staff-profile {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.staff-profile:hover {
+    transform: scale(1.02);
+}
+
+.staff-profile strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.staff-profile span {
+    display: block;
+    font-size: 0.9em;
+    color: #777;
+}
