@@ -11,7 +11,7 @@ type SidebarItem = {
 };
 
 // Sample sidebar items
-const currentPath = `/pages/dashboard`
+const currentPath = `/dashboard`
 const sidebarItems: SidebarItem[] = [
   { title: 'Main Dashboard', path: `${currentPath}` },
   { title: 'View Menu', path: `${currentPath}/menu` },
