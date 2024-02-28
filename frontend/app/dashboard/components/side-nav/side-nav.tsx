@@ -14,9 +14,9 @@ type SidebarItem = {
 const currentPath = `/dashboard`
 const sidebarItems: SidebarItem[] = [
   { title: 'Main Dashboard', path: `${currentPath}` },
-  { title: 'View Menu', path: `${currentPath}/menu` },
-  { title: 'View Customers', path: `${currentPath}/customers` },
-  { title: 'View Orders', path: `${currentPath}/orders` },
+  { title: 'Sales Overview', path: `${currentPath}/sales-overview` },
+  { title: 'Manage Staff', path: `${currentPath}/manage-staff` },
+  { title: 'Past Orders', path: `${currentPath}/past-orders` },
   // Add more sidebar items as needed
 ];
 

@@ -1,13 +1,13 @@
 // Dashboard.tsx (or any other page/component)
 import React from 'react';
-import MenuOverview from './components/menu-overview/menu-overview';
+import SalesOverview from './components/sales-overview/sales-overview';
 import PopularDishes from './components/popular-dishes/popular-dishes';
 
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <h1>Menu</h1>
-      <MenuOverview />
+      <h1>Sales Overview</h1>
+      <SalesOverview />
       <PopularDishes />
     </div>
   );

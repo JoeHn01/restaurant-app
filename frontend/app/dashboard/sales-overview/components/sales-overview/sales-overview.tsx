@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './menu-overview.module.css';
+import styles from './sales-overview.module.css';
 
 interface Dish {
   name: string;
@@ -176,7 +176,7 @@ const MenuOverview: React.FC = () => {
   
     return (
       <div className={styles.menuOverview}>
-        <h2>Menu Overview</h2>
+        <h2>Overview</h2>
         <div className={styles.categoryContainer}>
           {menuCategories.map((category, index) => (
             <div key={index} className={styles.categoryCard}>
