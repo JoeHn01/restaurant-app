@@ -22,9 +22,9 @@ const MenuCart = () => {
 
   return (
     <MenuCartContext.Provider value={{ isMenuActive, setIsMenuActive }}>
+    <button className={styles.toggleButton} onClick={handleClick}>{!isMenuActive ? 'View Menu' : 'View Cart'}</button>
       <div className={styles.menuCartContainer}>
         {isMenuActive ? <Menu /> : <Cart />}
-        <button className={styles.toggleButton} onClick={handleClick}>{!isMenuActive ? 'View Menu' : 'View Cart'}</button>
       </div>
     </MenuCartContext.Provider>
   )
