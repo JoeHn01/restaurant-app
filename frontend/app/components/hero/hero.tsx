@@ -4,15 +4,13 @@ import React from 'react'
 const Hero = () => {
   return (
     <section id="home" className={styles.hero}>
-      <div className={styles.heroContent}>
-        <div className={styles.heroImage}></div>
-        <h1 className={styles.heroHeading}>Welcome to Our Website!</h1>
-        <p className={styles.heroSubheading}>
-          Discover a world of [insert your product/service type] and explore
-          everything we offer.
-        </p>
-        <button className={styles.heroButton}>Explore More</button>
-      </div>
+      <img className={styles.heroImage} />
+      <h1 className={styles.heroHeading}>Welcome to Our Website!</h1>
+      <p className={styles.heroSubheading}>
+        Discover a world of [insert your product/service type] and explore
+        everything we offer.
+      </p>
+      <button className={styles.heroButton}>Explore More</button>
     </section>
   )
 }
