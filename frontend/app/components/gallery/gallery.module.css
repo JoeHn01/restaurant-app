@@ -66,11 +66,17 @@
   color: #fff;
   padding: 1rem;
   font-size: 1rem;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 20%;
   margin: 2rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.galleryButton:hover {
+  background-color: #087871;
 }
 
 @media only screen and (max-width: 860px) {
