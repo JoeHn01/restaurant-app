@@ -17,19 +17,25 @@
   color: #333;
 }
 
-.navlist {
+.logoImage {
+  position: relative;
+  width: 55px;
+  height: auto;
+}
+
+.navList {
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0 30rem;
 }
 
-.navitem {
+.navItem {
   display: flex;
   margin: 0;
 }
 
-.navlink {
+.navLink {
   text-decoration: none;
   color: #f2efef;
   font-weight: bold;
@@ -37,8 +43,29 @@
   transition: background-color 0.3s ease;
 }
 
-.navlink:hover {
+.navLink:hover {
   color: #087871;
   background-color: #bffcfc;
+  cursor: pointer;
+}
+
+.headerLink {
+  margin-right: 0.7rem;
+}
+
+.headerButton {
+  border: darkcyan solid 0.5px;
+  border-radius: 5px;
+  padding: 0.7rem;
+  font-weight: bold;
+  color: #087871;
+  background-color: #bffcfc;
+  transition: background-color 0.3s ease;
+}
+
+.headerButton:hover {
+  color: white;
+  background-color: darkcyan;
+  border: white solid 0.5px;
   cursor: pointer;
 }

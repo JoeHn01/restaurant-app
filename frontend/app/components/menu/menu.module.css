@@ -56,6 +56,11 @@
   font-style: italic;
 }
 
+.menuLink {
+  width: auto;
+  margin: 2rem;
+}
+
 .menuButton {
   position: relative;
   background-color: #008b8b;
@@ -65,8 +70,11 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 20%;
-  margin: 2rem;
+  transition: background-color 0.3 ease-in-out;
+}
+
+.menuButton:hover {
+  background-color: #087871;
 }
 
 @media only screen and (max-width: 660px) {

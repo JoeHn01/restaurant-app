@@ -47,7 +47,9 @@ const Menu = () => {
           <span className={styles.menuItemPrice}>Item Price</span>
         </div>
       </div>
-      <button className={styles.menuButton}>View Full Menu</button>
+      <a className={styles.menuLink} href="/online-ordering">
+        <button className={styles.menuButton}>View Full Menu</button>
+      </a>
     </section>
   )
 }

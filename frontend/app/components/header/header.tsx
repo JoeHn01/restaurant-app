@@ -21,17 +21,22 @@ const Header = () => {
 
   return (
     <header id="header" className={styles.header}>
-      <a className={styles.logo}>Logo</a>
+      <a className={styles.logo} href="/">
+        <img className={styles.logoImage} src="empty-image.jpg" />
+      </a>
       <nav>
-        <ul className={styles.navlist}>
-          <li className={styles.navitem}><a className={styles.navlink} onClick={handleNavigationClick}>Home</a></li>
-          <li className={styles.navitem}><a className={styles.navlink} onClick={handleNavigationClick}>About</a></li>
-          <li className={styles.navitem}><a className={styles.navlink} onClick={handleNavigationClick}>Menu</a></li>
-          <li className={styles.navitem}><a className={styles.navlink} onClick={handleNavigationClick}>Gallery</a></li>
-          <li className={styles.navitem}><a className={styles.navlink} onClick={handleNavigationClick}>Contact</a></li>
-          <li className={styles.navitem}><a className={styles.navlink} onClick={handleNavigationClick}>Footer</a></li>
+        <ul className={styles.navList}>
+          <li className={styles.navItem}><a className={styles.navLink} onClick={handleNavigationClick}>Home</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} onClick={handleNavigationClick}>About</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} onClick={handleNavigationClick}>Menu</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} onClick={handleNavigationClick}>Gallery</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} onClick={handleNavigationClick}>Contact</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} onClick={handleNavigationClick}>Footer</a></li>
         </ul>
       </nav>
+      <a className={styles.headerLink} href="/online-ordering">
+        <button className={styles.headerButton}>Place an Order</button>
+      </a>
     </header>
   )
 }
