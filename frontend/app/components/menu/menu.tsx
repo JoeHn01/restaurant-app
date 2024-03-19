@@ -4,7 +4,7 @@ import React from 'react'
 const Menu = () => {
   return (
     <section id="menu" className={styles.menu}>
-      <div className={styles.menuImage}></div>
+      <img className={styles.menuImage} />
       <h2 className={styles.menuCategory}>Category Name</h2>
       <div className={styles.menuItems}>
         <div className={styles.menuItem}>

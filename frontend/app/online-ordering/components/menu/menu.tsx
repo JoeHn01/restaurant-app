@@ -36,6 +36,7 @@ const Menu = () => {
 
   return (
     <div className={styles.menu}>
+      <img className={styles.menuImage} />
       {/* Map over each category and render them */}
       {Object.entries(menuItems).map(([category, items]) => (
         <div className={styles.menuCategory} key={category}>
