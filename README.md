@@ -38,11 +38,11 @@ The server will listen on port 5000. We implemented an Apollo server plugin for 
 3. TypeScript (superset of JavaScript with static typing)
 
 ### Running the front end server:
-Prerequisites: Ensure you have Node.js and npm (or yarn) installed on your system.
+Prerequisites: Ensure you have Node.js and npm (or yarn) installed on your system, as well as Next.js and React.js.
 
 1. Install Dependencies by navigating to the front end directory
 ``` bash
-cd /backend
+cd /frontend
 ```
 and running
 ``` bash
