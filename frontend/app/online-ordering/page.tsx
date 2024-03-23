@@ -6,11 +6,11 @@ import OrderSummary from "./components/orderSummary/orderSummary";
 
 export default function Home() {
     return (
-      <div>
+      <>
         <Header />
         <MenuCart />
         {/* <OrderForm />
         <OrderSummary /> */}
-      </div>
+      </>
     );
   }

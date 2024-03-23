@@ -3,7 +3,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <section id="about" className={styles.about}>
+    <div id="about" className={styles.about}>
       <h2 className={styles.aboutHeading}>About Us</h2>
       <p className={styles.aboutSubheading}>
         [Insert a brief description of your company, its mission, and values. Briefly explain what makes your company unique and why customers should choose you.]
@@ -31,7 +31,7 @@ const About = () => {
         </div>
       </div>
       <button className={styles.aboutButton}>Join The Team</button>
-  </section>
+  </div>
   )
 }
 

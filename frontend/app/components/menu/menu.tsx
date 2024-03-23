@@ -3,7 +3,7 @@ import React from 'react'
 
 const Menu = () => {
   return (
-    <section id="menu" className={styles.menu}>
+    <div id="menu" className={styles.menu}>
       <img className={styles.menuImage} />
       <h2 className={styles.menuCategory}>Category Name</h2>
       <div className={styles.menuItems}>
@@ -50,7 +50,7 @@ const Menu = () => {
       <a className={styles.menuLink} href="/online-ordering">
         <button className={styles.menuButton}>View Full Menu</button>
       </a>
-    </section>
+    </div>
   )
 }
 
