@@ -23,3 +23,10 @@
   background-color: #bffcfc;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .navList {
+    flex-direction: column;
+    margin: 0;
+  }
+}

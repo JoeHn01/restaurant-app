@@ -46,12 +46,8 @@
     flex-direction: column;
     justify-content: center;
   }
-  .navList {
-    flex-direction: column; /* Change flex direction to column */
+
+  .logo {
     margin: 0;
-  }
-  
-  .navItem {
-    margin: 0.5rem 0; /* Add some margin between items */
   }
 }
